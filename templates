@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spam Mail Classifier</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 50px; background: #f9f9f9; }
+        .container { max-width: 600px; margin: auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);}
+        h2 { text-align: center; }
+        textarea { width: 100%; height: 100px; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; background: #007BFF; border: none; color: white; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 20px; font-size: 18px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📧 Spam Mail Classifier</h2>
+        <form method="POST" action="/predict">
+            <textarea name="message" placeholder="Enter your email message here..."></textarea>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+            <div class="result">
+                <strong>Message:</strong> {{ message }} <br><br>
+                <strong>Result:</strong> {{ prediction }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
