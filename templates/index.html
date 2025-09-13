@@ -2,16 +2,65 @@
 <html>
 <head>
     <title>Spam Mail Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            text-align: center;
+            padding: 40px;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .spam {
+            color: red;
+            font-weight: bold;
+        }
+        .ham {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body style="font-family: Arial; text-align: center; margin-top: 50px;">
-    <h1>📩 Spam Mail Classifier</h1>
-    <form method="POST">
-        <textarea name="message" rows="5" cols="40" placeholder="Enter your message here..."></textarea><br><br>
-        <button type="submit">Classify</button>
-    </form>
-
-    {% if prediction %}
-        <h2>Prediction: {{ prediction }}</h2>
-    {% endif %}
+<body>
+    <div class="container">
+        <h2>📧 Spam Mail Classifier</h2>
+        <form action="/predict" method="POST">
+            <textarea name="message" rows="5" placeholder="Enter your message here..."></textarea><br>
+            <button type="submit">Check</button>
+        </form>
+        
+        {% if prediction %}
+            {% if "Spam" in prediction %}
+                <h3 class="spam">⚠️ {{ prediction }}</h3>
+                <p><b>Warning:</b> Suspicious link detected. It will not open.</p>
+            {% else %}
+                <h3 class="ham">✅ {{ prediction }}</h3>
+            {% endif %}
+        {% endif %}
+    </div>
 </body>
 </html>
